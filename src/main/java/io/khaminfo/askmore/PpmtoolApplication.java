@@ -91,7 +91,9 @@ public class PpmtoolApplication {
 			ResourceDatabasePopulator databasePopulator = new ResourceDatabasePopulator(resource);
 
 			databasePopulator.setScripts(resource);
+		    
 			databasePopulator.execute(dataSource);
+			System.out.println("setting script done");
 
 		} catch (ScriptException e) {
 			// TODO Auto-generated catch block

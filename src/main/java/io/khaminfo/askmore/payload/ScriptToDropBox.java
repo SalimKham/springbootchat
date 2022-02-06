@@ -13,6 +13,7 @@ import com.dropbox.core.DbxException;
 import com.dropbox.core.DbxRequestConfig;
 import com.dropbox.core.v2.DbxClientV2;
 import com.dropbox.core.v2.files.UploadErrorException;
+import com.dropbox.core.v2.files.WriteMode;
 
 
 @Component
@@ -29,11 +30,8 @@ public class ScriptToDropBox implements Runnable {
 	public void run() {
 		while (true) {
 			try {
-				Thread.sleep(180000);
-                if(!change) {
-                	
-                	continue;
-                }
+				Thread.sleep(10000);
+             
        		 File dump = new File("schema2.sql");
 				synchronized (monitor) {
 
@@ -41,31 +39,29 @@ public class ScriptToDropBox implements Runnable {
 						dump.delete();
 					}
 					
-					jdbcTemplate.execute("script to '" + dump.getAbsolutePath() + "'");
+					jdbcTemplate.execute("script to '" + dump.getPath() + "'");
 					System.out.println("script saved");
 		
 					FileInputStream file2 = new FileInputStream(dump);
-                    client.files().delete("/sql/schema.sql");
-					client.files().uploadBuilder("/sql/schema.sql")
+                    //client.files().delete("/sql/schema.sql");
+                   
+					client.files().uploadBuilder("/sql/schema.sql").withMode(WriteMode.OVERWRITE)
 
-							.uploadAndFinish(new ByteArrayInputStream(file2.readAllBytes()));
+							.uploadAndFinish(new ByteArrayInputStream(new FileInputStream(dump).readAllBytes()));
 					file2.close();
+					
 					System.out.println("upload finish");
 					change = false;
 				}
 
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				
 			} catch (UploadErrorException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				
 			} catch (DbxException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				System.out.println(e.getMessage());
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				
 			}
 
 		}
