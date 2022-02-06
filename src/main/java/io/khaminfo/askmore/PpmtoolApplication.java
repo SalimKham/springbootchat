@@ -1,6 +1,7 @@
 package io.khaminfo.askmore;
 
 import java.io.ByteArrayOutputStream;
+
 import java.io.IOException;
 
 import java.util.TimeZone;
@@ -68,8 +69,6 @@ public class PpmtoolApplication {
 	Resource resource = new ByteArrayResource(downloadFile.toByteArray());
 		dataSource = jdbc.getDataSource();
 		createDefaultDB(resource);
-//jdbc.update(downloadFile.toString());
-          System.out.println("download finish");
 			ScriptToDropBox myThread = applicationContext.getBean(ScriptToDropBox.class);
 			myThread.setJdbc(jdbc);
 			new Thread(myThread).start();

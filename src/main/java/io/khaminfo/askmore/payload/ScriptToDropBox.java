@@ -30,8 +30,9 @@ public class ScriptToDropBox implements Runnable {
 	public void run() {
 		while (true) {
 			try {
-				Thread.sleep(10000);
-             
+				Thread.sleep(60000);
+             if(!change)
+            	 continue;
        		 File dump = new File("schema2.sql");
 				synchronized (monitor) {
 
@@ -40,8 +41,7 @@ public class ScriptToDropBox implements Runnable {
 					}
 					
 					jdbcTemplate.execute("script to '" + dump.getPath() + "'");
-					System.out.println("script saved");
-		
+					
 					FileInputStream file2 = new FileInputStream(dump);
                     //client.files().delete("/sql/schema.sql");
                    
