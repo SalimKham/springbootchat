@@ -34,7 +34,6 @@ public class ScriptToDropBox implements Runnable {
                 	
                 	continue;
                 }
-                File file = ResourceUtils.getFile("classpath:");
        		 File dump = new File("schema2.sql");
 				synchronized (monitor) {
 

@@ -2,12 +2,12 @@ package io.khaminfo.askmore.services;
 
 import java.security.Principal;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
 
-import org.h2.tools.Script;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
