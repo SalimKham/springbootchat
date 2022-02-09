@@ -10,10 +10,10 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>io.KhamInfo</groupId>
-	<artifactId>AskMore</artifactId>
+	<artifactId>io.KhamInfo.chat</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>AskMore</name>
-	<description>Ask more web app</description>
+	<name>Chat</name>
+	<description>chat server api</description>
 
 	<properties>
 		<java.version>1.8</java.version>
